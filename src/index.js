@@ -7,8 +7,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { moviesReducer } from './reducers/index';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import logger from 'redux-logger';
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

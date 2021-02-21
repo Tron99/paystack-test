@@ -2,6 +2,7 @@ import {
   FETCH_MOVIES_SUCCES,
   FETCH_MOVIES_ERROR,
   FETCH_MOVIES,
+  SELECT_MOVIE,
 } from '../constants';
 
 export const moviesReducer = (state = {}, action) => {
@@ -18,6 +19,11 @@ export const moviesReducer = (state = {}, action) => {
         isLoading: false,
         err: action.err.message,
       });
+    case SELECT_MOVIE:
+      return Object.assign({}, state, {
+        selectedMovie: action.payload,
+      });
+
     default:
       return state;
   }

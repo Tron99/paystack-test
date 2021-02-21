@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  background-color: #000;
+  height: 100vh;
+  .logoImage{
+    max-width: 50%;
+  }
+  .search{
+    width: 100%;
+  }
+  .movie-form{
+    margin: 10% auto !important;
+    width: 100% !important;
+    label{
+      color: yellow;
+      font-size: 20px;
+    }
+  }
+  .navbar{
+    background-color: #000 !important;
+    .navbar-brand{
+      color: yellow  !important;
+    }
+    border-bottom: 2px solid yellow;
+  }
+}
