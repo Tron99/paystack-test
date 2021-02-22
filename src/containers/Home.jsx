@@ -1,17 +1,16 @@
-import React, { useEffect, useState, useStateRef } from 'react';
+import React, { useEffect, useState,useRef, useStateRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovies } from '../actions/index';
+import { getMovies,getCharacter } from '../actions/index';
 import { ReactComponent as Logo } from '../assets/star-wars-4.svg';
-import { SELECT_MOVIE } from '../constants';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const [selectedMovie, setSelected] = useState(0);
 
-  const { isLoading, movies, err, selectedMovie } = useSelector((state) => ({
+  const { isLoading, movies, err } = useSelector((state) => ({
     isLoading: state.isLoading,
     movies: state.movies,
     err: state?.err,
-    selectedMovie: state.movies?.selectedMovie,
   }));
   const { moviesArr } = movies;
 
@@ -19,10 +18,22 @@ const Home = () => {
     let selected = moviesArr.filter((item) => {
       return item.episode_id === parseInt(e.target.value);
     });
-    dispatch({ type: SELECT_MOVIE, payload: selected });
+    setSelected(selected);
+    
     console.log('VALUE CHANGED', e.target.value);
-    console.log('selected value', selectedMovie);
+    console.log('selected value', selectedMovie["0"]);
+
+    selectedMovie["0"] && selectedMovie["0"].characters.forEach((item)=>{
+      console.log("urlChar", item)
+      dispatch(getCharacter(item))
+    })
   };
+
+  const moviesRef = useRef(selectedMovie)
+  useEffect(() => {
+    moviesRef.current = selectedMovie
+    console.log(moviesRef.current)
+  }, [selectedMovie])
 
   useEffect(
     function () {
@@ -67,10 +78,10 @@ const Home = () => {
           </div>
         </div>
         <div className="container">
-          <Logo className="logoImage" />
+          {!selectedMovie && <Logo className="logoImage" />}
         </div>
         {selectedMovie && (
-          <marquee scrollamount="1" width="60%" direction="up" height="100px">
+          <marquee scrollamount="2" width="60%" direction="up" height="100px">
             {selectedMovie[0].opening_crawl}{' '}
           </marquee>
         )}

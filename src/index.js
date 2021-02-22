@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { moviesReducer } from './reducers/index';
+import { moviesReducer, charactersReducer } from './reducers/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import logger from 'redux-logger';
@@ -18,6 +18,7 @@ const initialState = {};
 const store = createStore(
   combineReducers({
     movies: moviesReducer,
+    characters: charactersReducer,
   }),
 
   storeEnhancers(applyMiddleware(thunk, logger))
