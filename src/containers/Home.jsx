@@ -19,20 +19,17 @@ const Home = () => {
       return item.episode_id === parseInt(e.target.value);
     });
     setSelected(selected);
-    
-    console.log('VALUE CHANGED', e.target.value);
-    console.log('selected value', selectedMovie["0"]);
-
-    selectedMovie["0"] && selectedMovie["0"].characters.forEach((item)=>{
-      console.log("urlChar", item)
-      dispatch(getCharacter(item))
-    })
   };
 
   const moviesRef = useRef(selectedMovie)
   useEffect(() => {
     moviesRef.current = selectedMovie
     console.log(moviesRef.current)
+
+    moviesRef.current["0"] && moviesRef.current["0"].characters.forEach((item)=>{
+      console.log("urlChar", item)
+      dispatch(getCharacter(item))
+    })
   }, [selectedMovie])
 
   useEffect(
